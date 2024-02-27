@@ -31,14 +31,22 @@ const NewItem = () => {
 
         return (
             <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input type="text" value={name} onChange={({target}) => setName(target.value)} required />
-                
-                <label>Quantity:</label>
-                <input type="number" min="1" max="99" value={quantity} onChange={({target}) => setQuantity(parseInt(target.value))} required />
-                
-                <label>Category:</label>
-                <select value={category} onChange={({target}) => setCategory(target.value)}>
+                <div style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
+                <label style={{ marginRight: '10px' }} >Item Name: </label>
+                <input type="text" value={name} onChange={({target}) => setName(target.value)} 
+                style={{ color: 'black', borderRadius: '5px' }} required />
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px', margin: '20px' }}>
+                <label style={{ marginRight: '10px' }} >Quantity: </label>
+                <input type="number" min="1" max="99" value={quantity} onChange={({target}) => setQuantity(parseInt(target.value))} 
+                style={{ color: 'black', borderRadius: '5px', paddingLeft: '5px' }} required />
+                </div>
+
+                <div>
+                <label style={{ marginRight: '10px' }} >Category: </label>
+                <select value={category} onChange={({target}) => setCategory(target.value)} 
+                style={{ color: 'black', borderRadius: '5px' }} >
                     <option value="produce">Produce</option>
                     <option value="dairy">Dairy</option>
                     <option value="bakery">Bakery</option>
@@ -51,6 +59,7 @@ const NewItem = () => {
                     <option value="household">Household</option>
                     <option value="other">Other</option>
                 </select>
+                </div>
                 
                 <button type="submit"
                 class="w-full mt-4 py-2 px-4
