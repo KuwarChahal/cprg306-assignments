@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const NewItem = () => {
+const NewItem = ({ onAddItem }) => {
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState("Produce");
@@ -11,41 +11,42 @@ const NewItem = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const Item ={
+    const id = Math.random().toString(36).substr(2, 9);
+
+        const newItem ={
             name,
             quantity,
             category,
         };
 
-        console.log(Item)
+        onAddItem(newItem);
 
-        alert("added item: ".concat(name,", Quantity: ").concat(quantity,", Category: ").concat(category))
-
-        
         setName("");
         setQuantity(1);
         setCategory("Produce");
-
     };
-
 
         return (
             <form onSubmit={handleSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'row', margin: '10px' }}>
-                <label style={{ marginRight: '10px', fontSize: '17px' }} >Item Name: </label>
+                <label style={{ marginRight: '10px', fontSize: '17px' }}> 
+                Item Name: </label>
                 <input type="text" value={name} onChange={({target}) => setName(target.value)} 
                 style={{ color: 'black', borderRadius: '5px', height: '33px' }} required />
                 </div>
 
+
                 <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px', margin: '20px' }}>
-                <label style={{ marginRight: '10px', fontSize: '17px' }} >Quantity: </label>
+                <label style={{ marginRight: '10px', fontSize: '17px' }}> 
+                Quantity: </label>
                 <input type="number" min="1" max="99" value={quantity} onChange={({target}) => setQuantity(parseInt(target.value))} 
                 style={{ color: 'black', borderRadius: '5px', paddingLeft: '5px', height: '33px' }} required />
                 </div>
 
 
                 <div>
-                <label style={{ marginRight: '10px', fontSize: '17px' }} >Category: </label>
+                <label style={{ marginRight: '10px', fontSize: '17px' }}>
+                Category: </label>
                 <select value={category} onChange={({target}) => setCategory(target.value)} 
                 style={{ color: 'black', borderRadius: '5px', height: '33px' }} >
                     <option value="produce">Produce</option>
@@ -63,7 +64,7 @@ const NewItem = () => {
                 </div>
                 
                 <button type="submit"
-                class="w-full mt-4 py-2 px-4
+                className="w-full mt-4 py-2 px-4
                 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 
                 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">+</button>
             </form>
